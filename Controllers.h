@@ -84,8 +84,19 @@ void pushPQ(int day, char month[], int year, char name[]){
                 else{
                     int i=0;
                     while(i<strlen(newNode->name) && i>strlen(curr->name)){
-                        if(newNode->name[i]>curr->name[i]){
-                            
+                        if(newNode->name[i] < curr->name[i]){
+                            curr->next->prev=newNode;
+                            newNode->next=curr->next;
+                            curr->next=newNode;
+                            newNode->prev=curr;
+                            break;
+                        }
+                        else{
+                            newNode->next=curr;
+                            newNode->prev=curr->prev;
+                            curr->prev->next=newNode;
+                            curr->prev=newNode;
+                            break;
                         }
                         i++;
                     }
